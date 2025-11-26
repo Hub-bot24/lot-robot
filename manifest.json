@@ -1,4 +1,10 @@
 {
+  "name": "LOT-Robot",
+  "short_name": "LOT-Robot",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#c09853",
   "icons": [
     {
       "src": "icon.png",
