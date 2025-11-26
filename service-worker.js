@@ -1,22 +1,21 @@
-self.addEventListener("install", event => {
-  event.waitUntil(
-    caches.open("lot-robot-cache").then(cache => {
-      return cache.addAll([
-        "/lot-robot/",
-        "/lot-robot/index.html",
-        "/lot-robot/styles.css",
-        "/lot-robot/app.js",
-        "/lot-robot/icon.png",
-        "/lot-robot/manifest.json"
-      ]);
-    })
-  );
+self.addEventListener("install", e => {
+    e.waitUntil(
+        caches.open("lot-robot-cache").then(cache => {
+            return cache.addAll([
+                "index.html",
+                "styles.css",
+                "app.js",
+                "icon.png",
+                "manifest.json"
+            ]);
+        })
+    );
 });
 
-self.addEventListener("fetch", event => {
-  event.respondWith(
-    caches.match(event.request).then(response => {
-      return response || fetch(event.request);
-    })
-  );
+self.addEventListener("fetch", e => {
+    e.respondWith(
+        caches.match(e.request).then(response => {
+            return response || fetch(e.request);
+        })
+    );
 });
