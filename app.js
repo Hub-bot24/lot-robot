@@ -1,17 +1,17 @@
-function calculate() {
-  const M1 = parseFloat(document.getElementById("M1").value);
-  const M2 = parseFloat(document.getElementById("M2").value);
-  const A  = parseFloat(document.getElementById("A").value);
-  const DL = parseFloat(document.getElementById("DL").value);
+function calcTest(num) {
+    let M1 = parseFloat(document.getElementById(`m1_t${num}`).value);
+    let M2 = parseFloat(document.getElementById(`m2_t${num}`).value);
+    let A  = parseFloat(document.getElementById(`a_t${num}`).value);
+    let DL = parseFloat(document.getElementById(`dl_t${num}`).value);
 
-  if (isNaN(M1)) return alert("Enter M1");
+    if (isNaN(M1) || isNaN(M2) || isNaN(A) || isNaN(DL)) {
+        alert("Enter all fields");
+        return;
+    }
 
-  const R1 = (M1 - M2) / A;
-  const R2 = (1000 * DL) / R1;
+    let R1 = (M1 - M2) / A;
+    let R2 = 1000 * DL / R1;
 
-  document.getElementById("output").innerHTML = `
-    <b>Spread Rate (Kg/m²):</b> ${R1.toFixed(3)}<br>
-    <b>Spread Rate (m²/m³):</b> ${R2.toFixed(0)}
-  `;
+    document.getElementById(`result_t${num}`).innerHTML =
+        `Spread Rate (Kg/m²): ${R1.toFixed(3)}<br>Spread Rate (m³/m²): ${R2.toFixed(0)}`;
 }
-
