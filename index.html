@@ -1,156 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
-<head><link rel="manifest" href="manifest.json">
-<link rel="icon" type="image/png" href="icon.png">
-
-<meta name="theme-color" content="#003366">
-
-<!-- Required for iPhone homescreen icon -->
-<link rel="apple-touch-icon" href="icon.png">
-
-    <meta charset="UTF-8">
-    <title>Field Spread Rate Calculator</title>
-    <link rel="stylesheet" href="style.css">
-
-    <!-- PDF Library -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #eef4fb;
-            padding: 20px;
-        }
-        .container {
-            max-width: 900px;
-            margin: auto;
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px #0003;
-        }
-        h1 {
-            color: #003366;
-            margin-bottom: 20px;
-        }
-        .header-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-        .row {
-            display: flex;
-            justify-content: space-between;
-        }
-        .row label {
-            width: 160px;
-            font-weight: bold;
-        }
-        .row input {
-            width: 230px;
-            padding: 5px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-        }
-        th {
-            background: #dce7f7;
-            text-align: left;
-        }
-        input {
-            width: 100%;
-            padding: 6px;
-        }
-        .pdf-btn {
-            background: #003366;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            margin: 15px 0;
-        }
-        .pdf-btn:hover {
-            background: #0055aa;
-        }
-    </style>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LOT-Robot</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="manifest" href="manifest.json">
 </head>
-
 <body>
-<div class="container">
 
-    <h1>Field Spread Rate Calculator</h1>
+  <h1>LOT-Robot</h1>
 
-    <!-- HEADER SECTION -->
-    <div class="header-grid">
+  <div class="form">
+    <label>M1:</label><input id="M1" type="number" step="0.001"><br>
+    <label>M2:</label><input id="M2" type="number" step="0.001" value="0.85"><br>
+    <label>A:</label><input id="A" type="number" step="0.001" value="0.97"><br>
+    <label>DL:</label><input id="DL" type="number" step="0.001" value="1.45"><br>
 
-        <div class="row"><label>Project:</label><input id="proj"></div>
-        <div class="row"><label>Road:</label><input id="road"></div>
+    <button onclick="calculate()">CALCULATE</button>
 
-        <div class="row"><label>Job/Contract #:</label><input id="job"></div>
-        <div class="row"><label>Site Location:</label><input id="site"></div>
+    <div id="output"></div>
+  </div>
 
-        <div class="row"><label>Quarry Source:</label><input id="quarry"></div>
-        <div class="row"><label>Aggregate Size:</label><input id="agg"></div>
-
-        <div class="row"><label>Truck Rego #:</label><input id="rego"></div>
-        <div class="row"><label>Truck Fleet #:</label><input id="fleet"></div>
-
-        <div class="row"><label>Tested By:</label><input id="tester"></div>
-        <div class="row"><label>Date:</label><input id="date" type="date"></div>
-
-    </div>
-
-    <button onclick="downloadPDF()" class="pdf-btn">Download PDF Report</button>
-
-    <!-- TEST 1 -->
-    <h2>Test 1</h2>
-    <table class="calc">
-        <tr><th>Mass Canvas Mat & Aggregate (M1)</th><td><input id="M1_1"></td></tr>
-        <tr><th>Mass Canvas Mat (M2)</th><td><input id="M2_1" value="0.85"></td></tr>
-        <tr><th>Area of Canvas Mat (A)</th><td><input id="A_1" value="0.97"></td></tr>
-        <tr><th>Spread Rate Kg/m² (R1)</th><td><input id="R1_1" disabled></td></tr>
-        <tr><th>Loose Unit Mass DL</th><td><input id="DL_1" value="1.45"></td></tr>
-        <tr><th>Spread Rate m²/m³ (R2)</th><td><input id="R2_1" disabled></td></tr>
-    </table>
-
-    <!-- TEST 2 -->
-    <h2>Test 2</h2>
-    <table class="calc">
-        <tr><th>Mass Canvas Mat & Aggregate (M1)</th><td><input id="M1_2"></td></tr>
-        <tr><th>Mass Canvas Mat (M2)</th><td><input id="M2_2" value="0.85"></td></tr>
-        <tr><th>Area of Canvas Mat (A)</th><td><input id="A_2" value="0.97"></td></tr>
-        <tr><th>Spread Rate Kg/m² (R1)</th><td><input id="R1_2" disabled></td></tr>
-        <tr><th>Loose Unit Mass DL</th><td><input id="DL_2" value="1.45"></td></tr>
-        <tr><th>Spread Rate m²/m³ (R2)</th><td><input id="R2_2" disabled></td></tr>
-    </table>
-
-    <!-- TEST 3 -->
-    <h2>Test 3</h2>
-    <table class="calc">
-        <tr><th>Mass Canvas Mat & Aggregate (M1)</th><td><input id="M1_3"></td></tr>
-        <tr><th>Mass Canvas Mat (M2)</th><td><input id="M2_3" value="0.85"></td></tr>
-        <tr><th>Area of Canvas Mat (A)</th><td><input id="A_3" value="0.97"></td></tr>
-        <tr><th>Spread Rate Kg/m² (R1)</th><td><input id="R1_3" disabled></td></tr>
-        <tr><th>Loose Unit Mass DL</th><td><input id="DL_3" value="1.45"></td></tr>
-        <tr><th>Spread Rate m²/m³ (R2)</th><td><input id="R2_3" disabled></td></tr>
-    </table>
-
-</div>
-
-<script src="app.js"></script>
-<script>
-if ("serviceWorker" in navigator) {
-    navigator.serviceWorker.register("service-worker.js");
-}
-</script>
+  <script src="app.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
 
 </body>
 </html>
+
