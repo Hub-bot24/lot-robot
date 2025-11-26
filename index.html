@@ -1,34 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LOT-Robot</title>
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="manifest" href="manifest.json">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LOT-Robot – Field Spread Calculator</title>
+<link rel="stylesheet" href="styles.css" />
+<link rel="manifest" href="manifest.json" />
 </head>
+
 <body>
+<div class="header">
+    <img src="icon-192.png" class="logo">
+    <h1>Field Spread Rate of Cover Aggregate (Canvas Mat)</h1>
+</div>
 
-  <h1>LOT-Robot</h1>
+<div class="form-sheet">
 
-  <div class="form">
-    <label>M1:</label><input id="M1" type="number" step="0.001"><br>
-    <label>M2:</label><input id="M2" type="number" step="0.001" value="0.85"><br>
-    <label>A:</label><input id="A" type="number" step="0.001" value="0.97"><br>
-    <label>DL:</label><input id="DL" type="number" step="0.001" value="1.45"><br>
+<!-- Test 1 -->
+<h2>Test 1</h2>
+<div class="table">
+    <div class="row">
+        <label>M1</label><input id="m1_t1" type="number" step="0.001" />
+    </div>
+    <div class="row">
+        <label>M2</label><input id="m2_t1" type="number" step="0.001" value="0.85" />
+    </div>
+    <div class="row">
+        <label>A</label><input id="a_t1" type="number" step="0.001" value="0.97" />
+    </div>
+    <div class="row">
+        <label>DL</label><input id="dl_t1" type="number" step="0.001" value="1.45" />
+    </div>
 
-    <button onclick="calculate()">CALCULATE</button>
+    <button onclick="calcTest(1)">Calculate</button>
 
-    <div id="output"></div>
-  </div>
+    <div class="result" id="result_t1"></div>
+</div>
 
-  <script src="app.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('service-worker.js');
-    }
-  </script>
+<!-- Test 2 -->
+<h2>Test 2</h2>
+<div class="table">
+    <div class="row">
+        <label>M1</label><input id="m1_t2" type="number" step="0.001" />
+    </div>
+    <div class="row">
+        <label>M2</label><input id="m2_t2" type="number" step="0.001" value="0.85" />
+    </div>
+    <div class="row">
+        <label>A</label><input id="a_t2" type="number" step="0.001" value="0.97" />
+    </div>
+    <div class="row">
+        <label>DL</label><input id="dl_t2" type="number" step="0.001" value="1.45" />
+    </div>
 
+    <button onclick="calcTest(2)">Calculate</button>
+
+    <div class="result" id="result_t2"></div>
+</div>
+
+<!-- Test 3 -->
+<h2>Test 3</h2>
+<div class="table">
+    <div class="row">
+        <label>M1</label><input id="m1_t3" type="number" step="0.001" />
+    </div>
+    <div class="row">
+        <label>M2</label><input id="m2_t3" type="number" step="0.001" value="0.85" />
+    </div>
+    <div class="row">
+        <label>A</label><input id="a_t3" type="number" step="0.001" value="0.97" />
+    </div>
+    <div class="row">
+        <label>DL</label><input id="dl_t3" type="number" step="0.001" value="1.45" />
+    </div>
+
+    <button onclick="calcTest(3)">Calculate</button>
+
+    <div class="result" id="result_t3"></div>
+</div>
+
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
+
 
