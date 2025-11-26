@@ -1,0 +1,11 @@
+body{font-family:Arial;background:#f2f7ff;margin:0;padding:20px;}
+.container{max-width:900px;margin:auto;}
+h1{color:#003366;margin-bottom:20px;}
+.header-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:25px;}
+.row label{font-weight:bold;width:150px;display:inline-block;}
+.row input{width:180px;padding:5px;}
+.calc{width:100%;border-collapse:collapse;margin-bottom:25px;}
+.calc th{background:#e6ecf5;text-align:left;padding:8px;border:1px solid #aac;font-weight:bold;width:60%;}
+.calc td{border:1px solid #aac;padding:8px;}
+.calc input{width:150px;}
+hr{margin:25px 0;}

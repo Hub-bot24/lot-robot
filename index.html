@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Field Spread Rate Calculator</title>
+<link rel="stylesheet" href="styles.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+
+<div class="container">
+
+<h1>Field Spread Rate Calculator</h1>
+
+<div class="header-grid">
+<div class="row"><label>Project:</label><input id="proj"></div>
+<div class="row"><label>Road:</label><input id="road"></div>
+
+<div class="row"><label>Job/Contract #:</label><input id="job"></div>
+<div class="row"><label>Site Location:</label><input id="site"></div>
+
+<div class="row"><label>Quarry Source:</label><input id="quarry"></div>
+<div class="row"><label>Aggregate Size:</label><input id="agg"></div>
+
+<div class="row"><label>Truck Rego #:</label><input id="rego"></div>
+<div class="row"><label>Truck Fleet #:</label><input id="fleet"></div>
+
+<div class="row"><label>Tested By:</label><input id="tester"></div>
+<div class="row"><label>Date:</label><input id="date" type="date"></div>
+</div>
+
+<hr>
+
+<h2>Test 1</h2>
+<table class="calc">
+<tr><th>Mass Canvas Mat & Aggregate (M1)</th><td><input id="M1_T1"></td></tr>
+<tr><th>Mass Canvas Mat (M2)</th><td><input id="M2_T1" value="0.85"></td></tr>
+<tr><th>Area of Canvas Mat (A)</th><td><input id="A_T1" value="0.97"></td></tr>
+<tr><th>Spread Rate Kg/m² (R1)</th><td><input id="R1_T1" disabled></td></tr>
+<tr><th>Loose Unit Mass DL</th><td><input id="DL_T1" value="1.45"></td></tr>
+<tr><th>Spread Rate m²/m³ (R2)</th><td><input id="R2_T1" disabled></td></tr>
+</table>
+
+<h2>Test 2</h2>
+<table class="calc">
+<tr><th>Mass Canvas Mat & Aggregate (M1)</th><td><input id="M1_T2"></td></tr>
+<tr><th>Mass Canvas Mat (M2)</th><td><input id="M2_T2" value="0.85"></td></tr>
+<tr><th>Area of Canvas Mat (A)</th><td><input id="A_T2" value="0.97"></td></tr>
+<tr><th>Spread Rate Kg/m² (R1)</th><td><input id="R1_T2" disabled></td></tr>
+<tr><th>Loose Unit Mass DL</th><td><input id="DL_T2" value="1.45"></td></tr>
+<tr><th>Spread Rate m²/m³ (R2)</th><td><input id="R2_T2" disabled></td></tr>
+</table>
+
+<h2>Test 3</h2>
+<table class="calc">
+<tr><th>Mass Canvas Mat & Aggregate (M1)</th><td><input id="M1_T3"></td></tr>
+<tr><th>Mass Canvas Mat (M2)</th><td><input id="M2_T3" value="0.85"></td></tr>
+<tr><th>Area of Canvas Mat (A)</th><td><input id="A_T3" value="0.97"></td></tr>
+<tr><th>Spread Rate Kg/m² (R1)</th><td><input id="R1_T3" disabled></td></tr>
+<tr><th>Loose Unit Mass DL</th><td><input id="DL_T3" value="1.45"></td></tr>
+<tr><th>Spread Rate m²/m³ (R2)</th><td><input id="R2_T3" disabled></td></tr>
+</table>
+
+</div>
+</body>
+</html>
