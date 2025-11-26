@@ -1,0 +1,16 @@
+{
+  "name": "Field Spread Rate Calculator",
+  "short_name": "LOT-Robot",
+  "start_url": "/lot-robot/index.html",
+  "scope": "/lot-robot/",
+  "display": "standalone",
+  "background_color": "#f2f7ff",
+  "theme_color": "#003366",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
