@@ -1,81 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 <title>LOT-Robot</title>
 
 <style>
     body {
         font-family: Arial, sans-serif;
-        background: #eef4f8;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        justify-content: center;
+        background: #e9f0f7;
+        padding: 20px;
+        text-align: center;
     }
 
-    .box {
-        width: 95%;
-        max-width: 400px;
+    .container {
         background: white;
         padding: 20px;
-        margin-top: 25px;
         border-radius: 12px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        width: 90%;
+        max-width: 420px;
+        margin: auto;
+        box-shadow: 0 0 12px rgba(0,0,0,0.15);
     }
 
     h2 {
-        text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
 
     .row {
         display: flex;
-        align-items: center;
-        margin-bottom: 10px;
+        justify-content: space-between;
+        margin: 10px 0;
+        text-align: left;
     }
 
     .label {
-        width: 70px;
+        width: 65%;
         font-weight: bold;
     }
 
     input {
-        flex: 1;
-        padding: 10px;
+        width: 30%;
+        padding: 6px;
         font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 6px;
     }
 
     button {
         width: 100%;
         padding: 12px;
-        background: #006cff;
-        border: none;
-        border-radius: 6px;
+        background: #0066ff;
         color: white;
+        font-size: 18px;
+        border: none;
+        border-radius: 8px;
         margin-top: 15px;
-        font-size: 16px;
+        cursor: pointer;
     }
 
-    .result {
-        background: #ffffff;
+    .result-box {
+        margin-top: 20px;
         padding: 12px;
+        text-align: left;
+        background: #d6f6d4;
         border-radius: 8px;
-        margin-top: 12px;
         font-size: 16px;
-        border-left: 4px solid #006cff;
-    }
-
-    .result-green {
-        background: #d4f7d2;
-        padding: 12px;
-        border-radius: 8px;
-        margin-top: 12px;
-        font-size: 16px;
-        border-left: 4px solid #2fa84f;
         font-weight: bold;
     }
 </style>
@@ -83,45 +70,54 @@
 </head>
 <body>
 
-<div class="box">
-    <h2>LOT-Robot</h2>
+<h2>LOT-Robot</h2>
 
-    <div class="row"><div class="label">M1:</div><input id="m1" type="number" step="0.01"></div>
-    <div class="row"><div class="label">M2:</div><input id="m2" type="number" step="0.01"></div>
-    <div class="row"><div class="label">A:</div><input id="a" type="number" step="0.01"></div>
-    <div class="row"><div class="label">DL:</div><input id="dl" type="number" step="0.01"></div>
+<div class="container">
 
-    <button onclick="calculate()">Calculate</button>
+    <div class="row">
+        <div class="label">Mass of Canvas Mat & Aggregate (Kg)</div>
+        <input id="m1" type="number" step="0.01" value="10">
+    </div>
 
-    <div id="kgResult" class="result"></div>
-    <div id="m3Result" class="result-green"></div>
+    <div class="row">
+        <div class="label">Mass of Canvas Mat (Kg)</div>
+        <input id="m2" type="number" step="0.01" value="0.85">
+    </div>
+
+    <div class="row">
+        <div class="label">Area of Canvas Mat (m²)</div>
+        <input id="a" type="number" step="0.01" value="0.97">
+    </div>
+
+    <div class="row">
+        <div class="label">Loose Unit Mass of Screenings</div>
+        <input id="dl" type="number" step="0.01" value="1.45">
+    </div>
+
+    <button onclick="calc()">Calculate</button>
+
+    <div id="results" class="result-box" style="display:none;"></div>
+
 </div>
 
+
 <script>
-function calculate() {
+function calc() {
     let m1 = parseFloat(document.getElementById("m1").value);
     let m2 = parseFloat(document.getElementById("m2").value);
-    let a  = parseFloat(document.getElementById("a").value);
+    let a = parseFloat(document.getElementById("a").value);
     let dl = parseFloat(document.getElementById("dl").value);
 
-    if (isNaN(m1) || isNaN(m2) || isNaN(a) || isNaN(dl)) {
-        alert("Please fill in all fields.");
-        return;
-    }
-
-    // Spread Rate kg/m2
     let spreadKg = (m1 - m2) / a;
+    let spreadM3 = spreadKg / dl;
 
-    // Spread Rate m2/m3
-    let spreadM3 = (1 / (spreadKg / dl));
-
-    document.getElementById("kgResult").innerHTML =
-        "Spread Rate (kg/m²): <b>" + spreadKg.toFixed(3) + "</b>";
-
-    document.getElementById("m3Result").innerHTML =
-        "Spread Rate (m²/m³): <b>" + spreadM3.toFixed(3) + "</b>";
+    document.getElementById("results").style.display = "block";
+    document.getElementById("results").innerHTML =
+        "Spread Rate (kg/m²): " + spreadKg.toFixed(3) + "<br>" +
+        "Spread Rate (m²/m³): " + spreadM3.toFixed(3);
 }
 </script>
 
 </body>
 </html>
+
