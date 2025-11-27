@@ -1,11 +1,1 @@
-{
-  "name": "LOT-Robot",
-  "short_name": "LotRobot",
-  "start_url": "index.html",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#ffffff",
-  "icons": [
-    { "src": "icon.png", "sizes": "512x512", "type": "image/png" }
-  ]
-}
+{"name": "My Little Robot", "short_name": "Robot", "start_url": "index.html", "display": "standalone", "background_color": "#e9f1f9", "theme_color": "#0066ff", "icons": [{"src": "icon.png", "sizes": "512x512", "type": "image/png"}]}
