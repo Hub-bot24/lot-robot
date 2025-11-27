@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta charset="UTF-8">
 <title>My Little Robot</title>
+
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -50,6 +52,14 @@
         font-size: 18px;
         font-weight: bold;
     }
+    .guide-box {
+        margin-top: 25px;
+        background: #eef6ff;
+        padding: 16px;
+        border-radius: 8px;
+        font-size: 16px;
+        border: 1px solid #b5d3ff;
+    }
 </style>
 </head>
 <body>
@@ -57,6 +67,7 @@
 <div class="container">
     <h2>My Little Robot</h2>
 
+    <!-- MAIN CALCULATOR -->
     <label>M1 – Mass Canvas Mat & Aggregate (kg)</label>
     <input id="m1" type="number" step="0.0001" value="10" oninput="calc()">
 
@@ -74,6 +85,16 @@
 
     <!-- R2 final result (only green box) -->
     <div id="r2" class="green-box"></div>
+
+
+    <!-- REQUIRED R2 GUIDELINE SECTION -->
+    <div class="guide-box">
+        <label>Required Spread Rate R2 (m²/m³) – Manual Input</label>
+        <input id="reqR2" type="number" step="0.0001" value="150" oninput="calcRequired()">
+
+        <div id="guideOut"></div>
+    </div>
+
 </div>
 
 <script>
@@ -97,10 +118,41 @@ function calc() {
 
     document.getElementById("r2").innerHTML =
         "Spread Rate (m²/m³): " + R2.toFixed(3);
+
+    calcRequired(); // refresh guideline section
 }
-calc();
+
+function calcRequired() {
+    let M2 = parseFloat(document.getElementById("m2").value);
+    let A  = parseFloat(document.getElementById("a").value);
+    let DL = parseFloat(document.getElementById("dl").value);
+    let reqR2 = parseFloat(document.getElementById("reqR2").value);
+
+    if (isNaN(reqR2) || reqR2 <= 0 || isNaN(M2) || isNaN(A) || A === 0 || isNaN(DL)) {
+        document.getElementById("guideOut").innerHTML = "";
+        return;
+    }
+
+    // 5% range
+    let R2_min = reqR2 * 0.95;
+    let R2_max = reqR2 * 1.05;
+
+    // Convert R2 to R1
+    let R1_min = (1000 * DL) / R2_max;
+    let R1_max = (1000 * DL) / R2_min;
+
+    // Convert R1 to required M1
+    let M1_min = (R1_min * A) + M2;
+    let M1_max = (R1_max * A) + M2;
+
+    document.getElementById("guideOut").innerHTML =
+        "<b>Target R2:</b> " + reqR2.toFixed(3) + " m²/m³<br><br>" +
+        "<b>M1 Minimum (kg):</b> " + M1_min.toFixed(3) + "<br>" +
+        "<b>M1 Maximum (kg):</b> " + M1_max.toFixed(3);
+}
+
+calc(); // run on load
 </script>
 
 </body>
 </html>
-
